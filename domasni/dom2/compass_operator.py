@@ -20,7 +20,6 @@ kernels = [
 
 def apply_filters(src_img):
     """
-
     :param src_img:
     :return: Lista od 8 slika i vrz sekoja slika e apliciran po eden od 8 te kerneli
     """
@@ -36,11 +35,7 @@ def show_all_filtered_images(f_imgs):
 
 
 def calculate_result(f_imgs, shape):
-    flatten_imgs = []
-    for f_img in f_imgs:
-        flatten_imgs.append(f_img.flatten())
-
-    return np.reshape(np.maximum.reduce(flatten_imgs), shape)
+    return np.reshape(np.maximum.reduce([f_img.flatten() for f_img in f_imgs]), shape)
 
 
 def threshold_edges(img, min_value):
@@ -69,5 +64,5 @@ if __name__ == '__main__':
 
     cv2.namedWindow("Thresholding Demo")
     cv2.createTrackbar("Lower Threshold Value:", "Thresholding Demo", 0, 255, on_trackbar)
-    on_trackbar(0)
+    on_trackbar(50)
     cv2.waitKey(0)
